@@ -10,20 +10,20 @@
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#fcfaf6;
-    --paper-2:#f3eee5;
-    --ink:#231f1e;
-    --ink-soft:#6e655f;
-    --wine:#7c2f3e;
-    --wine-2:#9c3d4e;
-    --wine-tint:#f6ecec;
-    --line:#e6dfd4;
-    --serif:'Instrument Serif',Georgia,serif;
-    --sans:'Figtree',system-ui,-apple-system,sans-serif;
-    --shadow:0 1px 2px rgba(35,31,30,.04),0 8px 24px -12px rgba(35,31,30,.12);
-    --shadow-lift:0 2px 4px rgba(35,31,30,.05),0 18px 40px -16px rgba(35,31,30,.18);
-    --shadow-shot:0 2px 6px rgba(35,31,30,.05),0 30px 60px -24px rgba(35,31,30,.28);
-  }
+  --paper:#fafbfc;
+  --paper-2:#eef1f5;
+  --ink:#0f1d2e;
+  --ink-soft:#5d6a78;
+  --wine:#1b3a5c;
+  --wine-2:#2a5580;
+  --wine-tint:#e9eef4;
+  --line:#dde2e8;
+  --serif:'Instrument Serif',Georgia,serif;
+  --sans:'Figtree',system-ui,-apple-system,sans-serif;
+  --shadow:0 1px 2px rgba(15,29,46,.04),0 8px 24px -12px rgba(15,29,46,.12);
+  --shadow-lift:0 2px 4px rgba(15,29,46,.05),0 18px 40px -16px rgba(15,29,46,.18);
+  --shadow-shot:0 2px 6px rgba(15,29,46,.05),0 30px 60px -24px rgba(15,29,46,.28);
+}
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{
@@ -132,6 +132,7 @@
   }
   .shot img{
     width:100%;height:100%;object-fit:cover;object-position:top center;display:block;
+     position:relative;z-index:1;
     transition:transform .8s cubic-bezier(.2,.7,.2,1);
   }
   .shot img[hidden]{display:none}
