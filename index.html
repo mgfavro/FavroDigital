@@ -244,13 +244,18 @@
   .offer-form{background:var(--paper-2);border-radius:14px;padding:30px 28px;display:flex;flex-direction:column;gap:13px}
   .offer-form label{font-size:13.5px;font-weight:600;color:var(--ink);margin-bottom:-6px}
   .offer-form label span{font-weight:400;color:var(--ink-soft)}
-  .offer-form input,.offer-form textarea{
+  .offer-form input,.offer-form textarea,.offer-form select{
     width:100%;background:var(--paper);border:1px solid var(--line);border-radius:9px;
     padding:13px 14px;color:var(--ink);font-family:var(--sans);font-size:16px;transition:border-color .2s;
   }
   .offer-form textarea{resize:vertical;min-height:88px;line-height:1.5}
+  .offer-form select{
+    appearance:none;-webkit-appearance:none;cursor:pointer;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%235d6a78' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 16px center;padding-right:38px;
+  }
   .offer-form input::placeholder,.offer-form textarea::placeholder{color:#a89f97}
-  .offer-form input:focus,.offer-form textarea:focus{outline:none;border-color:var(--wine)}
+  .offer-form input:focus,.offer-form textarea:focus,.offer-form select:focus{outline:none;border-color:var(--wine)}
   .offer-form input.flash{border-color:var(--wine);background:var(--wine-tint)}
   .offer-form .hint{font-size:12.5px;color:var(--ink-soft);margin-top:-8px;line-height:1.45}
   .offer-form button{
@@ -324,6 +329,32 @@
   .buyout-terms li.no{color:var(--ink-soft)}
   .buyout-terms li.no::before{content:"×";color:#a8412c;font-size:14px}
 
+  /* ONE-TIME PURCHASE */
+  .onetime{
+    max-width:860px;margin:20px auto 0;position:relative;
+    border:1px solid var(--wine);border-radius:16px;background:var(--paper);
+    padding:38px 32px 34px;display:grid;grid-template-columns:1.1fr .9fr;gap:38px;align-items:center;
+    box-shadow:var(--shadow-lift);
+  }
+  .onetime .badge{
+    position:absolute;top:-12px;left:32px;
+    font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+    background:var(--wine);color:var(--paper);padding:6px 14px;border-radius:100px;
+  }
+  .onetime h3{font-family:var(--serif);font-weight:400;font-size:clamp(27px,3.3vw,36px);line-height:1.1;letter-spacing:-.02em;margin:12px 0 10px}
+  .onetime h3 em{font-style:italic;color:var(--wine)}
+  .onetime p{color:var(--ink-soft);font-size:15.5px;max-width:44ch}
+  .onetime-price{display:flex;align-items:baseline;gap:8px;margin:22px 0 4px}
+  .onetime-price .from{font-size:14px;color:var(--ink-soft)}
+  .onetime-price .amt{font-family:var(--serif);font-weight:400;font-size:56px;line-height:1;letter-spacing:-.03em;color:var(--ink)}
+  .onetime-price .per{font-size:15px;color:var(--ink-soft)}
+  .onetime .btn{margin-top:18px}
+  .onetime-list{list-style:none;display:flex;flex-direction:column;gap:11px}
+  .onetime-list li{font-size:15px;line-height:1.5;display:flex;gap:11px;align-items:flex-start}
+  .onetime-list li::before{content:"✓";color:var(--wine);font-size:13px;line-height:1.6;flex-shrink:0}
+  .onetime-list li.muted{color:var(--ink-soft)}
+  .onetime-list li.muted::before{content:"·";color:var(--ink-soft);font-size:15px}
+
   /* CONTACT */
   .contact{text-align:center;background:var(--paper-2)}
   .contact .eyebrow{justify-content:center}
@@ -371,6 +402,7 @@
     .plans{grid-template-columns:1fr}
     .plan .lede{min-height:0}
     .buyout{grid-template-columns:1fr;gap:26px;padding:30px 26px}
+    .onetime{grid-template-columns:1fr;gap:24px;padding:34px 26px 30px}
   }
   @media(max-width:540px){
     .process{grid-template-columns:1fr}
@@ -590,7 +622,7 @@
         <span class="eyebrow">Pricing</span>
         <h2>See it before you pay for it.</h2>
       </div>
-      <p>The design is free. You only start paying once you've seen your site and want it live.</p>
+      <p>The design is free. Pick a simple monthly plan or a one-time purchase — either way, you only pay once you've seen your site and want it live.</p>
     </div>
 
     <div class="offer reveal">
@@ -611,6 +643,13 @@
 
         <label for="of-email">Email</label>
         <input type="email" id="of-email" name="email" placeholder="you@yourbusiness.com" required>
+
+        <label for="of-plan">How you'd like to pay</label>
+        <select id="of-plan" name="payment_preference">
+          <option value="Not sure yet — help me decide" selected>Not sure yet — help me decide</option>
+          <option value="Monthly plan (from $99/month)">Monthly plan — from $99/month</option>
+          <option value="One-time purchase (from $500)">One-time purchase — from $500</option>
+        </select>
 
         <label for="of-site">Current website <span>(optional)</span></label>
         <input type="text" id="of-site" name="current_website" placeholder="https://">
@@ -642,7 +681,7 @@
           <li>Security updates and fixes</li>
           <li class="muted">Edits live within 5 business days</li>
         </ul>
-        <a href="#pricing" class="btn btn-outline">Start with a free design</a>
+        <a href="#pricing" class="btn btn-outline" data-plan="Monthly plan (from $99/month)">Start with a free design</a>
       </div>
 
       <div class="plan featured reveal" style="transition-delay:.08s">
@@ -658,7 +697,7 @@
           <li>Same-day turnaround on urgent changes</li>
           <li>New pages &amp; landing pages included</li>
         </ul>
-        <a href="#pricing" class="btn btn-solid">Start with a free design</a>
+        <a href="#pricing" class="btn btn-solid" data-plan="Monthly plan (from $99/month)">Start with a free design</a>
       </div>
     </div>
 
@@ -675,10 +714,35 @@
       <p>An edit is any text, image, pricing, or hours change to an existing page. Unused edits don't roll over. New features and full redesigns are quoted separately.</p>
     </div>
 
+    <div class="onetime reveal">
+      <span class="badge">One-time purchase</span>
+      <div>
+        <span class="eyebrow">Prefer to pay once?</span>
+        <h3>Own your site outright, <em>from day one</em>.</h3>
+        <p>Rather buy than rent? I'll build your site the same way — you just pay a single time and own it completely. No monthly plan, no contract.</p>
+        <div class="onetime-price">
+          <span class="from">from</span>
+          <span class="amt">$500</span>
+          <span class="per">one-time · &amp; up</span>
+        </div>
+        <a href="#pricing" class="btn btn-solid" data-plan="One-time purchase (from $500)">Start with a free design</a>
+      </div>
+      <div>
+        <ul class="onetime-list">
+          <li><b>Free account setup &amp; domain connection</b></li>
+          <li><b>Custom-built to your liking</b> — revised until it's right</li>
+          <li><b>See the finished site before you pay</b> a cent</li>
+          <li>Full source code &amp; ownership transferred to you</li>
+          <li>Final price scoped to your project — starts at $500</li>
+          <li class="muted">Hosting &amp; ongoing edits available separately</li>
+        </ul>
+      </div>
+    </div>
+
     <div class="buyout reveal">
       <div>
-        <span class="eyebrow">Want to keep it for good?</span>
-        <h3>Buy your site outright, any time.</h3>
+        <span class="eyebrow">Already on a monthly plan?</span>
+        <h3>Buy out your site any time.</h3>
         <p>Already on a plan and want to own the site instead of renting it? You can buy it out whenever you like — the full codebase transfers to you, and it's yours to keep, move, or hand to another developer.</p>
         <a href="#contact" class="btn btn-outline">Ask about a buyout</a>
       </div>
@@ -772,6 +836,19 @@
   }
   heroBtn.addEventListener('click',handoff);
   heroEmail.addEventListener('keydown',e=>{if(e.key==='Enter')handoff();});
+
+  /* ---- PLAN CTAs -> preselect payment preference, focus form ---- */
+  const ofPlan=document.getElementById('of-plan');
+  document.querySelectorAll('a.btn[data-plan]').forEach(a=>{
+    a.addEventListener('click',()=>{
+      if(ofPlan)ofPlan.value=a.dataset.plan;
+      setTimeout(()=>{
+        ofName.focus({preventScroll:true});
+        ofName.classList.add('flash');
+        setTimeout(()=>ofName.classList.remove('flash'),1400);
+      },700);
+    });
+  });
 
   /* ---- FORM ---- */
   const form=document.getElementById('offerForm'),
